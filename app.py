@@ -3128,8 +3128,9 @@ if tab_topup is not None:
             with c3:
                 st.markdown(kpi_tile("🏛️ ภายในสะสม", f"{cum_int/1e9:,.2f} พันล้าน", f"{safe_pct(cum_int, cum_total):.1f}%", color="purple"), unsafe_allow_html=True)
             with c4:
-                st.markdown(kpi_tile("📅 เฉลี่ย/วัน", f"{cum_total/sum(month_days(pd.DataFrame({"month":[m]})) for m in topup_total["month"])/1e6:,.2f} ลบ.", "บาท/วัน", color="orange"), unsafe_allow_html=True)
-            st.markdown("---")
+                tot_topup_days = sum(month_days(pd.DataFrame({'month': [m]})) for m in topup_total['month'])
+                avg_topup_daily = (cum_total / tot_topup_days / 1e6) if tot_topup_days else 0
+                st.markdown(kpi_tile("📅 เฉลี่ย/วัน", f"{avg_topup_daily:,.2f} ลบ.", "บาท/วัน", color="orange"), unsafe_allow_html=True)
 
             cum_df = topup_total.copy()
             cum_df["cum_total_baht"] = cum_df["total_baht"].cumsum()
