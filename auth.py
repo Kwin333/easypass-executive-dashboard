@@ -1059,7 +1059,6 @@ def require_login():
             username = st.text_input(
                 "ชื่อผู้ใช้งาน",
                 placeholder="Username",
-                autocomplete="username",
             )
 
 
@@ -1071,7 +1070,6 @@ def require_login():
                 "รหัสผ่าน",
                 placeholder="Password",
                 type="password",
-                autocomplete="current-password",
             )
 
 
@@ -1079,10 +1077,7 @@ def require_login():
             # LOGIN BUTTON
             # ------------------------------------------------
 
-            submitted = st.form_submit_button(
-                "เข้าสู่ระบบ",
-                width='stretch',
-            )
+            submitted = st.form_submit_button("เข้าสู่ระบบ")
 
 
         # ====================================================
