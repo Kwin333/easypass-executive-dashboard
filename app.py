@@ -15,6 +15,13 @@ import plotly.graph_objects as go
 from pathlib import Path
 import datetime
 import base64
+import io
+
+try:
+    from supabase import create_client, Client
+    HAS_SUPABASE = True
+except ImportError:
+    HAS_SUPABASE = False
 
 from auth import require_login, logout, ROLE_LABELS, get_audit_log
 from settings_store import load_settings, update_thresholds, reset_thresholds_to_default, append_audit
@@ -35,6 +42,23 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 ASSETS_DIR = Path(__file__).parent / "assets"
 LOGO_PATH = ASSETS_DIR / "exat_logo.png"
+
+BUCKET_NAME = "easypass-data"
+
+@st.cache_resource
+def get_supabase_client():
+    if not HAS_SUPABASE:
+        return None
+    url = st.secrets.get("SUPABASE_URL")
+    key = st.secrets.get("SUPABASE_KEY")
+    if url and key:
+        try:
+            return create_client(url, key)
+        except Exception:
+            return None
+    return None
+
+supabase = get_supabase_client()
 
 
 def _img_to_base64(path):
@@ -242,13 +266,36 @@ if is_admin:
             uploaded_map[target] = f
         if st.sidebar.button("💾 บันทึกและแทนที่ไฟล์ลงระบบถาวร", type="primary", use_container_width=True):
             try:
-                for target_fname, uploaded_file in uploaded_map.items():
+                progress_bar = st.sidebar.progress(0)
+                total_files = len(uploaded_map)
+                success_count = 0
+                
+                for idx, (target_fname, uploaded_file) in enumerate(uploaded_map.items()):
+                    file_bytes = uploaded_file.getvalue()
+                    
+                    # 1. บันทึกทับบน Supabase Storage (ถ้ามีเชื่อมต่อไว้)
+                    if supabase is not None:
+                        try:
+                            supabase.storage.from_(BUCKET_NAME).upload(
+                                path=target_fname,
+                                file=file_bytes,
+                                file_options={"upsert": "true", "content-type": "text/csv"}
+                            )
+                        except Exception as se:
+                            st.sidebar.warning(f"⚠️ Supabase upload {target_fname}: {se}")
+                    
+                    # 2. บันทึกทับลงในดิสก์เครื่องควบคู่ไปด้วยเสมอ
                     dest_path = DATA_DIR / target_fname
                     with open(dest_path, "wb") as f_out:
-                        f_out.write(uploaded_file.getbuffer())
-                append_audit(user["name"], "อัปโหลดและแทนที่ไฟล์ CSV ถาวร", {"จำนวนไฟล์": len(uploaded_map)})
+                        f_out.write(file_bytes)
+                        
+                    success_count += 1
+                    progress_bar.progress((idx + 1) / total_files)
+                
+                storage_dest = "Supabase Storage + Local" if supabase is not None else "Local Disk"
+                append_audit(user["name"], f"อัปโหลดและแทนที่ไฟล์ CSV ({storage_dest})", {"จำนวนไฟล์": success_count})
                 st.cache_data.clear()
-                st.sidebar.success("✅ บันทึกไฟล์ลงดิสก์เรียบร้อยแล้ว!")
+                st.sidebar.success(f"✅ บันทึกทับข้อมูลสำเร็จ {success_count} ไฟล์ ({storage_dest})!")
                 st.rerun()
             except Exception as e:
                 st.sidebar.error(f"เกิดข้อผิดพลาด: {e}")
@@ -259,11 +306,30 @@ else:
 @st.cache_data(show_spinner=False)
 def load_and_validate_v2(filename: str):
     required = REQUIRED_COLUMNS[filename]
-    file_path = DATA_DIR / filename
+    df = None
+    loaded_source = "ดิสก์"
+
+    # 1. พยายามดึงไฟล์จาก Supabase Storage ก่อนถ้ามีการเชื่อมต่อ
+    if supabase is not None:
+        try:
+            file_bytes = supabase.storage.from_(BUCKET_NAME).download(filename)
+            if file_bytes:
+                df = pd.read_csv(io.BytesIO(file_bytes))
+                loaded_source = "Supabase"
+        except Exception:
+            df = None
+
+    # 2. หากยังไม่ได้ไฟล์จาก Supabase ให้ดึงจากโฟลเดอร์ data/ บนดิสก์ (Fallback)
+    if df is None:
+        file_path = DATA_DIR / filename
+        try:
+            if not file_path.exists():
+                return pd.DataFrame(columns=required), {"ไฟล์": filename, "แถว": 0, "สถานะ": "ERROR", "หมายเหตุ": "ไม่พบไฟล์"}
+            df = pd.read_csv(file_path)
+        except Exception as e:
+            return pd.DataFrame(columns=required), {"ไฟล์": filename, "แถว": 0, "สถานะ": "ERROR", "หมายเหตุ": f"อ่านไม่สำเร็จ: {e}"}
+
     try:
-        if not file_path.exists():
-            return pd.DataFrame(columns=required), {"ไฟล์": filename, "แถว": 0, "สถานะ": "ERROR", "หมายเหตุ": "ไม่พบไฟล์"}
-        df = pd.read_csv(file_path)
         missing = [c for c in required if c not in df.columns]
         if missing:
             return df, {"ไฟล์": filename, "แถว": len(df), "สถานะ": "ERROR", "หมายเหตุ": f"ขาดคอลัมน์: {', '.join(missing)}"}
@@ -271,9 +337,9 @@ def load_and_validate_v2(filename: str):
             return df, {"ไฟล์": filename, "แถว": 0, "สถานะ": "ERROR", "หมายเหตุ": "ไฟล์ว่างเปล่า"}
         if "month" in df.columns:
             df = df.sort_values("month").reset_index(drop=True)
-        return df, {"ไฟล์": filename, "แถว": len(df), "สถานะ": "OK", "หมายเหตุ": "โครงสร้างถูกต้อง"}
+        return df, {"ไฟล์": filename, "แถว": len(df), "สถานะ": "OK", "หมายเหตุ": f"โหลดสำเร็จ ({loaded_source})"}
     except Exception as e:
-        return pd.DataFrame(columns=required), {"ไฟล์": filename, "แถว": 0, "สถานะ": "ERROR", "หมายเหตุ": f"อ่านไม่สำเร็จ: {e}"}
+        return pd.DataFrame(columns=required), {"ไฟล์": filename, "แถว": 0, "สถานะ": "ERROR", "หมายเหตุ": f"ประมวลผลไม่สำเร็จ: {e}"}
 
 
 # ----------------------------------------------------------------------------
@@ -487,6 +553,8 @@ st.sidebar.markdown("---")
 st.sidebar.caption(f"📅 ข้อมูลล่าสุด: เดือน {LATEST_MONTH} | ปีงบประมาณ 2569")
 TH_TZ = datetime.timezone(datetime.timedelta(hours=7))
 st.sidebar.caption(f"🕒 โหลดระบบเมื่อ: {datetime.datetime.now(TH_TZ).strftime('%d/%m/%Y %H:%M:%S')}")
+storage_status = "☁️ แหล่งข้อมูล: Supabase Storage" if supabase is not None else "📁 แหล่งข้อมูล: Local Data"
+st.sidebar.caption(storage_status)
 
 # ----------------------------------------------------------------------------
 # HELPERS
