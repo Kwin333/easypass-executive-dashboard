@@ -688,34 +688,40 @@ def _apply_login_style():
 
 
         /* ==================================================
-           INPUT CONTAINER (BaseWeb)
+           INPUT CONTAINER (Username & Password Match 100%)
         ================================================== */
 
-        [data-testid="stForm"] div[data-baseweb="input"],
-        [data-testid="stForm"] div[data-testid="stTextInputRootElement"] > div {
+        /* Outer container for both Username and Password inputs */
+        [data-testid="stForm"] .stTextInput > div > div {
             background: #F8FAFC !important;
             border: 1.5px solid #CBD5E1 !important;
             border-radius: 10px !important;
             min-height: 46px !important;
-            transition: all 0.2s ease-in-out !important;
+            width: 100% !important;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+            transition: all 0.2s ease-in-out !important;
             overflow: hidden !important;
         }
 
-        [data-testid="stForm"] div[data-baseweb="input"]:hover,
-        [data-testid="stForm"] div[data-testid="stTextInputRootElement"] > div:hover {
+        [data-testid="stForm"] .stTextInput > div > div:hover {
             border-color: #94A3B8 !important;
             background: #FFFFFF !important;
         }
 
-        [data-testid="stForm"] div[data-baseweb="input"]:focus-within,
-        [data-testid="stForm"] div[data-testid="stTextInputRootElement"] > div:focus-within {
+        [data-testid="stForm"] .stTextInput > div > div:focus-within {
             border-color: #0B5ED7 !important;
             background: #FFFFFF !important;
             box-shadow: 0 0 0 3.5px rgba(11, 94, 215, 0.15) !important;
         }
 
-        [data-testid="stForm"] input {
+        /* Strip all inner borders and backgrounds (eliminates double-border in password field) */
+        [data-testid="stForm"] .stTextInput > div > div div {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        [data-testid="stForm"] .stTextInput input {
             color: #0F172A !important;
             background: transparent !important;
             border: none !important;
@@ -724,27 +730,27 @@ def _apply_login_style():
             padding: 10px 14px !important;
             box-shadow: none !important;
             outline: none !important;
+            height: 44px !important;
         }
 
-        [data-testid="stForm"] input::placeholder {
+        [data-testid="stForm"] .stTextInput input::placeholder {
             color: #94A3B8 !important;
             opacity: 1 !important;
         }
 
-        /* Reset and style password visibility toggle button */
-        [data-testid="stForm"] div[data-baseweb="input"] button,
-        [data-testid="stForm"] div[data-baseweb="input"] button:hover,
-        [data-testid="stForm"] div[data-baseweb="input"] button:focus,
-        [data-testid="stForm"] div[data-baseweb="input"] button:active {
+        /* Password visibility toggle button */
+        [data-testid="stForm"] .stTextInput button,
+        [data-testid="stForm"] .stTextInput button:hover,
+        [data-testid="stForm"] .stTextInput button:focus,
+        [data-testid="stForm"] .stTextInput button:active {
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
-            width: auto !important;
-            min-width: 40px !important;
+            width: 44px !important;
+            min-width: 44px !important;
             max-width: 44px !important;
             height: 100% !important;
-            min-height: 38px !important;
-            max-height: 44px !important;
+            min-height: 40px !important;
             margin: 0 !important;
             padding: 0 8px !important;
             color: #64748B !important;
@@ -755,14 +761,14 @@ def _apply_login_style():
             border-radius: 0 !important;
         }
 
-        [data-testid="stForm"] div[data-baseweb="input"] button svg {
+        [data-testid="stForm"] .stTextInput button svg {
             fill: #64748B !important;
             width: 18px !important;
             height: 18px !important;
             transition: fill 0.2s ease !important;
         }
 
-        [data-testid="stForm"] div[data-baseweb="input"] button:hover svg {
+        [data-testid="stForm"] .stTextInput button:hover svg {
             fill: #0B5ED7 !important;
         }
 
