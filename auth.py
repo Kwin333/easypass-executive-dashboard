@@ -688,72 +688,94 @@ def _apply_login_style():
 
 
         /* ==================================================
-           INPUT CONTAINER (Username & Password Match 100%)
+           INPUT FIELDS (Username & Password Exactly Identical)
         ================================================== */
 
-        /* Outer container for both Username and Password inputs */
-        [data-testid="stForm"] .stTextInput > div > div {
-            background: #F8FAFC !important;
+        /* 1. Target the outer box of both fields:
+              - Username uses div[data-baseweb="base-input"]
+              - Password uses div[data-baseweb="input"] */
+        [data-testid="stForm"] div[data-baseweb="base-input"],
+        [data-testid="stForm"] div[data-baseweb="input"] {
+            background-color: #F8FAFC !important;
             border: 1.5px solid #CBD5E1 !important;
             border-radius: 10px !important;
-            min-height: 46px !important;
+            min-height: 48px !important;
+            height: 48px !important;
             width: 100% !important;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+            box-sizing: border-box !important;
             transition: all 0.2s ease-in-out !important;
+            display: flex !important;
+            align-items: center !important;
+            padding: 0 !important;
             overflow: hidden !important;
         }
 
-        [data-testid="stForm"] .stTextInput > div > div:hover {
+        /* Hover & Focus state for both fields */
+        [data-testid="stForm"] div[data-baseweb="base-input"]:hover,
+        [data-testid="stForm"] div[data-baseweb="input"]:hover {
             border-color: #94A3B8 !important;
-            background: #FFFFFF !important;
+            background-color: #FFFFFF !important;
         }
 
-        [data-testid="stForm"] .stTextInput > div > div:focus-within {
+        [data-testid="stForm"] div[data-baseweb="base-input"]:focus-within,
+        [data-testid="stForm"] div[data-baseweb="input"]:focus-within {
             border-color: #0B5ED7 !important;
-            background: #FFFFFF !important;
+            background-color: #FFFFFF !important;
             box-shadow: 0 0 0 3.5px rgba(11, 94, 215, 0.15) !important;
         }
 
-        /* Strip all inner borders and backgrounds (eliminates double-border in password field) */
-        [data-testid="stForm"] .stTextInput > div > div div {
+        /* 2. CRITICAL FIX: Strip all background, border, and padding from the inner base-input
+              that sits inside the password input container. This eliminates the inner white box. */
+        [data-testid="stForm"] div[data-baseweb="input"] div[data-baseweb="base-input"],
+        [data-testid="stForm"] div[data-baseweb="input"] > div {
             background: transparent !important;
+            background-color: transparent !important;
             border: none !important;
             box-shadow: none !important;
+            min-height: unset !important;
+            height: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
-        [data-testid="stForm"] .stTextInput input {
+        /* 3. Text Input tag inside both fields */
+        [data-testid="stForm"] input {
             color: #0F172A !important;
             background: transparent !important;
+            background-color: transparent !important;
             border: none !important;
-            font-size: 14.5px !important;
-            font-weight: 500 !important;
-            padding: 10px 14px !important;
             box-shadow: none !important;
             outline: none !important;
-            height: 44px !important;
+            font-size: 14.5px !important;
+            font-weight: 500 !important;
+            padding: 0 14px !important;
+            height: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
         }
 
-        [data-testid="stForm"] .stTextInput input::placeholder {
+        [data-testid="stForm"] input::placeholder {
             color: #94A3B8 !important;
             opacity: 1 !important;
         }
 
-        /* Password visibility toggle button */
-        [data-testid="stForm"] .stTextInput button,
-        [data-testid="stForm"] .stTextInput button:hover,
-        [data-testid="stForm"] .stTextInput button:focus,
-        [data-testid="stForm"] .stTextInput button:active {
+        /* 4. Password eye icon button - seamlessly integrated on the right */
+        [data-testid="stForm"] div[data-baseweb="input"] button,
+        [data-testid="stForm"] div[data-baseweb="input"] button:hover,
+        [data-testid="stForm"] div[data-baseweb="input"] button:focus,
+        [data-testid="stForm"] div[data-baseweb="input"] button:active {
             background: transparent !important;
+            background-color: transparent !important;
             border: none !important;
             box-shadow: none !important;
+            outline: none !important;
             width: 44px !important;
             min-width: 44px !important;
             max-width: 44px !important;
             height: 100% !important;
-            min-height: 40px !important;
             margin: 0 !important;
-            padding: 0 8px !important;
-            color: #64748B !important;
+            padding: 0 12px 0 0 !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -761,26 +783,26 @@ def _apply_login_style():
             border-radius: 0 !important;
         }
 
-        [data-testid="stForm"] .stTextInput button svg {
+        [data-testid="stForm"] div[data-baseweb="input"] button svg {
             fill: #64748B !important;
             width: 18px !important;
             height: 18px !important;
             transition: fill 0.2s ease !important;
         }
 
-        [data-testid="stForm"] .stTextInput button:hover svg {
+        [data-testid="stForm"] div[data-baseweb="input"] button:hover svg {
             fill: #0B5ED7 !important;
         }
 
         /* ==================================================
-           SUBMIT BUTTON (ONLY target the actual submit button)
+           SUBMIT BUTTON (Form Submit Only)
         ================================================== */
 
         [data-testid="stFormSubmitButton"] button,
         [data-testid="stForm"] .stButton > button {
             width: 100% !important;
             min-height: 48px !important;
-            margin-top: 14px !important;
+            margin-top: 16px !important;
             background: linear-gradient(135deg, #0B5ED7 0%, #003366 100%) !important;
             color: #FFFFFF !important;
             border: none !important;
@@ -814,7 +836,6 @@ def _apply_login_style():
             font-weight: 700 !important;
             font-size: 15.5px !important;
         }
-
 
         /* ==================================================
            FOOTER
