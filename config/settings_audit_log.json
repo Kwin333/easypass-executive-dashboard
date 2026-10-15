@@ -1,0 +1,414 @@
+{
+  "logs": [
+    {
+      "timestamp": "2026-10-15 09:40:09",
+      "user": "ผู้ดูแลระบบ",
+      "action": "Export รายงาน PDF",
+      "detail": {
+        "เดือน": "ส.ค.69",
+        "หัวข้อ": [
+          "summary",
+          "warning",
+          "reg",
+          "inv",
+          "traffic",
+          "anomaly",
+          "emv",
+          "motorway",
+          "topup",
+          "web",
+          "status",
+          "cs",
+          "annual"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-08 08:39:18",
+      "user": "ผู้ดูแลระบบ",
+      "action": "อัปโหลดและแทนที่ไฟล์ CSV ถาวร",
+      "detail": {
+        "จำนวนไฟล์": 1
+      }
+    },
+    {
+      "timestamp": "2026-10-07 14:26:35",
+      "user": "ผู้ดูแลระบบ",
+      "action": "อัปโหลดและแทนที่ไฟล์ CSV ถาวร",
+      "detail": {
+        "จำนวนไฟล์": 1
+      }
+    },
+    {
+      "timestamp": "2026-10-07 14:26:33",
+      "user": "ผู้ดูแลระบบ",
+      "action": "อัปโหลดและแทนที่ไฟล์ CSV ถาวร",
+      "detail": {
+        "จำนวนไฟล์": 1
+      }
+    },
+    {
+      "timestamp": "2026-10-07 11:03:00",
+      "user": "ผู้ดูแลระบบ",
+      "action": "Export รายงาน PDF",
+      "detail": {
+        "เดือน": "ส.ค.69",
+        "หัวข้อ": [
+          "summary",
+          "warning",
+          "reg",
+          "inv",
+          "traffic",
+          "anomaly",
+          "emv",
+          "motorway",
+          "topup",
+          "web",
+          "status",
+          "cs",
+          "annual"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-07 10:53:21",
+      "user": "ผู้ดูแลระบบ",
+      "action": "Export รายงาน PDF",
+      "detail": {
+        "เดือน": "ส.ค.69",
+        "หัวข้อ": [
+          "summary",
+          "warning",
+          "reg",
+          "inv",
+          "traffic",
+          "anomaly",
+          "emv",
+          "motorway",
+          "topup",
+          "web",
+          "status",
+          "cs",
+          "annual"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-07 09:36:29",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_crit": {
+          "from": 170000,
+          "to": 150000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-07 09:36:00",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_crit": {
+          "from": 150000,
+          "to": 170000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-06 18:03:58",
+      "user": "ผู้ดูแลระบบ",
+      "action": "Export รายงาน PDF",
+      "detail": {
+        "เดือน": "ส.ค.69",
+        "หัวข้อ": [
+          "summary",
+          "warning",
+          "reg",
+          "inv",
+          "traffic",
+          "anomaly",
+          "emv",
+          "motorway",
+          "topup",
+          "web",
+          "status",
+          "cs",
+          "annual"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-06 16:41:55",
+      "user": "ผู้ดูแลระบบ",
+      "action": "Export รายงาน PDF",
+      "detail": {
+        "เดือน": "ส.ค.69",
+        "หัวข้อ": [
+          "summary",
+          "warning",
+          "reg",
+          "inv",
+          "traffic",
+          "anomaly",
+          "emv",
+          "motorway",
+          "topup",
+          "web",
+          "status",
+          "cs",
+          "annual"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-06 15:54:05",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_crit": {
+          "from": 170000,
+          "to": 150000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-06 15:53:27",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_crit": {
+          "from": 150000,
+          "to": 170000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-06 15:10:40",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_crit": {
+          "from": 170000,
+          "to": 150000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-06 15:09:03",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_warn": {
+          "from": 150000,
+          "to": 180000
+        },
+        "obu_crit": {
+          "from": 150000,
+          "to": 170000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-06 15:07:27",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_warn": {
+          "from": 180000,
+          "to": 150000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-05 14:28:38",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_warn": {
+          "from": 160000,
+          "to": 180000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-05 14:27:37",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_warn": {
+          "from": 180000,
+          "to": 160000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-05 11:26:51",
+      "user": "ผู้ดูแลระบบ",
+      "action": "Export รายงาน PDF",
+      "detail": {
+        "เดือน": "ส.ค.69",
+        "หัวข้อที่เลือก": [
+          "summary",
+          "warning",
+          "reg",
+          "inv",
+          "traffic",
+          "anomaly",
+          "emv",
+          "motorway",
+          "topup",
+          "web",
+          "status",
+          "cs",
+          "annual"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-10-05 09:19:49",
+      "user": "ผู้ดูแลระบบ",
+      "action": "อัปโหลดและแทนที่ไฟล์ CSV ถาวร",
+      "detail": {
+        "จำนวนไฟล์": 1
+      }
+    },
+    {
+      "timestamp": "2026-10-05 09:18:53",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_crit": {
+          "from": 170000,
+          "to": 150000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-05 09:18:15",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_crit": {
+          "from": 150000,
+          "to": 170000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-05 09:17:49",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_warn": {
+          "from": 600000,
+          "to": 180000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-05 09:17:32",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_warn": {
+          "from": 400000,
+          "to": 600000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-05 09:17:22",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_warn": {
+          "from": 300000,
+          "to": 400000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-05 09:17:17",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "obu_warn": {
+          "from": 170000,
+          "to": 300000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-10-05 09:17:02",
+      "user": "ผู้ดูแลระบบ",
+      "action": "ปรับค่าเกณฑ์ Early Warning",
+      "detail": {
+        "reg_warn": {
+          "from": null,
+          "to": 15
+        },
+        "reg_crit": {
+          "from": null,
+          "to": 30
+        },
+        "anom_warn": {
+          "from": null,
+          "to": 5
+        },
+        "anom_crit": {
+          "from": null,
+          "to": 10
+        },
+        "topup_warn": {
+          "from": null,
+          "to": 5
+        },
+        "topup_crit": {
+          "from": null,
+          "to": 10
+        },
+        "lost_warn": {
+          "from": null,
+          "to": 5
+        },
+        "lost_crit": {
+          "from": null,
+          "to": 10
+        },
+        "obu_warn": {
+          "from": null,
+          "to": 170000
+        },
+        "obu_crit": {
+          "from": null,
+          "to": 150000
+        },
+        "sc_warn": {
+          "from": null,
+          "to": 150000
+        },
+        "sc_crit": {
+          "from": null,
+          "to": 120000
+        },
+        "cs_warn": {
+          "from": null,
+          "to": 5
+        },
+        "cs_crit": {
+          "from": null,
+          "to": 10
+        },
+        "etc_warn": {
+          "from": null,
+          "to": 1.5
+        },
+        "etc_crit": {
+          "from": null,
+          "to": 2.5
+        }
+      }
+    }
+  ]
+}

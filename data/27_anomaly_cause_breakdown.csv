@@ -1,0 +1,8 @@
+cause_name,cause_name_en,count,percentage,category
+ติดตั้งผิดตำแหน่ง/ไม่ติดตั้ง,install_issue,150976,35.00,ระบบ
+ไม่พบข้อมูลทางเข้า,no_entry_data,103527,24.00,ลูกค้า
+แบตฯ อ่อน,weak_battery,81958,19.00,ระบบ
+เงินไม่พอ,insufficient_balance,43136,10.00,ลูกค้า
+ไม่มีบัตร,no_card,38822,9.00,ลูกค้า
+ยอดเงินไม่เป็นปัจจุบัน,balance_not_current,8627,2.00,ลูกค้า
+บัตร Blacklist,blacklist,4315,1.00,ลูกค้า

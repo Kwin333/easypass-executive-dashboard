@@ -1,0 +1,17 @@
+users:
+  admin:
+    name: ผู้ดูแลระบบ
+    role: admin
+    password_hash: $2b$12$Itio.6kTL2vXZTTsh5kEXOV0a.oy3/MltbpXbHnmXAvQ4S4GqZaL.
+  governor:
+    name: ผู้ว่าการการทางพิเศษแห่งประเทศไทย
+    role: governor
+    password_hash: $2b$12$YYZzzcsF8.PHa8AXcddfL.JhEdgOnIbHjeSbphyC79tnDcAZmdZ6G
+  exec01:
+    name: ผู้บริหารระดับสูง
+    role: executive
+    password_hash: $2b$12$Rz6L46vpc.l4CzgETsbgoeAWKZFEwRzUX1TJjEga1pFKyHLbGVJoS
+  staff01:
+    name: เจ้าหน้าที่ปฏิบัติการ
+    role: viewer
+    password_hash: $2b$12$iPpT7dtxjNp5Gs1u1nxXBub0TJihZN/24Y3u0dn3LX5.iZV0VM5y6
