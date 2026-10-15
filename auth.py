@@ -244,7 +244,8 @@ def _log_event(
             exist_ok=True,
         )
 
-        now = datetime.datetime.now()
+        TH_TZ = datetime.timezone(datetime.timedelta(hours=7))
+        now = datetime.datetime.now(TH_TZ)
 
         row = pd.DataFrame(
             [

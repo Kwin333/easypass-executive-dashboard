@@ -485,7 +485,8 @@ th_lowbal_ratio_warn = current_th["lowbal_ratio_warn"]; th_lowbal_ratio_crit = c
 
 st.sidebar.markdown("---")
 st.sidebar.caption(f"📅 ข้อมูลล่าสุด: เดือน {LATEST_MONTH} | ปีงบประมาณ 2569")
-st.sidebar.caption(f"🕒 โหลดระบบเมื่อ: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
+TH_TZ = datetime.timezone(datetime.timedelta(hours=7))
+st.sidebar.caption(f"🕒 โหลดระบบเมื่อ: {datetime.datetime.now(TH_TZ).strftime('%d/%m/%Y %H:%M:%S')}")
 
 # ----------------------------------------------------------------------------
 # HELPERS
@@ -3131,6 +3132,7 @@ if tab_topup is not None:
                 tot_topup_days = sum(month_days(pd.DataFrame({'month': [m]})) for m in topup_total['month'])
                 avg_topup_daily = (cum_total / tot_topup_days / 1e6) if tot_topup_days else 0
                 st.markdown(kpi_tile("📅 เฉลี่ย/วัน", f"{avg_topup_daily:,.2f} ลบ.", "บาท/วัน", color="orange"), unsafe_allow_html=True)
+            st.markdown("---")
 
             cum_df = topup_total.copy()
             cum_df["cum_total_baht"] = cum_df["total_baht"].cumsum()
