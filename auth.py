@@ -688,125 +688,125 @@ def _apply_login_style():
 
 
         /* ==================================================
-           INPUT
+           INPUT CONTAINER (BaseWeb)
         ================================================== */
+
+        [data-testid="stForm"] div[data-baseweb="input"],
+        [data-testid="stForm"] div[data-testid="stTextInputRootElement"] > div {
+            background: #F8FAFC !important;
+            border: 1.5px solid #CBD5E1 !important;
+            border-radius: 10px !important;
+            min-height: 46px !important;
+            transition: all 0.2s ease-in-out !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+            overflow: hidden !important;
+        }
+
+        [data-testid="stForm"] div[data-baseweb="input"]:hover,
+        [data-testid="stForm"] div[data-testid="stTextInputRootElement"] > div:hover {
+            border-color: #94A3B8 !important;
+            background: #FFFFFF !important;
+        }
+
+        [data-testid="stForm"] div[data-baseweb="input"]:focus-within,
+        [data-testid="stForm"] div[data-testid="stTextInputRootElement"] > div:focus-within {
+            border-color: #0B5ED7 !important;
+            background: #FFFFFF !important;
+            box-shadow: 0 0 0 3.5px rgba(11, 94, 215, 0.15) !important;
+        }
 
         [data-testid="stForm"] input {
-
-            color:
-                #0F172A !important;
-
-            background:
-                #F8FAFC !important;
-
-            border:
-                1px solid #CBD5E1 !important;
-
-            border-radius:
-                8px !important;
-
-            min-height:
-                44px !important;
-
-            font-size:
-                14px !important;
-
-            padding:
-                9px 12px !important;
+            color: #0F172A !important;
+            background: transparent !important;
+            border: none !important;
+            font-size: 14.5px !important;
+            font-weight: 500 !important;
+            padding: 10px 14px !important;
+            box-shadow: none !important;
+            outline: none !important;
         }
-
-
-        [data-testid="stForm"] input:hover {
-
-            border-color:
-                #94A3B8 !important;
-        }
-
-
-        [data-testid="stForm"] input:focus {
-
-            color:
-                #0F172A !important;
-
-            background:
-                #FFFFFF !important;
-
-            border-color:
-                #0B5ED7 !important;
-
-            box-shadow:
-                0 0 0 3px
-                rgba(11, 94, 215, 0.12) !important;
-        }
-
 
         [data-testid="stForm"] input::placeholder {
-
-            color:
-                #64748B !important;
-
-            opacity:
-                1 !important;
+            color: #94A3B8 !important;
+            opacity: 1 !important;
         }
 
+        /* Reset and style password visibility toggle button */
+        [data-testid="stForm"] div[data-baseweb="input"] button,
+        [data-testid="stForm"] div[data-baseweb="input"] button:hover,
+        [data-testid="stForm"] div[data-baseweb="input"] button:focus,
+        [data-testid="stForm"] div[data-baseweb="input"] button:active {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            width: auto !important;
+            min-width: 40px !important;
+            max-width: 44px !important;
+            height: 100% !important;
+            min-height: 38px !important;
+            max-height: 44px !important;
+            margin: 0 !important;
+            padding: 0 8px !important;
+            color: #64748B !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            border-radius: 0 !important;
+        }
+
+        [data-testid="stForm"] div[data-baseweb="input"] button svg {
+            fill: #64748B !important;
+            width: 18px !important;
+            height: 18px !important;
+            transition: fill 0.2s ease !important;
+        }
+
+        [data-testid="stForm"] div[data-baseweb="input"] button:hover svg {
+            fill: #0B5ED7 !important;
+        }
 
         /* ==================================================
-           BUTTON
+           SUBMIT BUTTON (ONLY target the actual submit button)
         ================================================== */
 
-        [data-testid="stForm"] button {
-
-            width:
-                100% !important;
-
-            min-height:
-                46px !important;
-
-            margin-top:
-                8px !important;
-
-            background:
-                #0B5ED7 !important;
-
-            color:
-                #FFFFFF !important;
-
-            border:
-                none !important;
-
-            border-radius:
-                8px !important;
-
-            font-size:
-                15px !important;
-
-            font-weight:
-                700 !important;
-
-            box-shadow:
-                0 5px 16px
-                rgba(11, 94, 215, 0.30) !important;
+        [data-testid="stFormSubmitButton"] button,
+        [data-testid="stForm"] .stButton > button {
+            width: 100% !important;
+            min-height: 48px !important;
+            margin-top: 14px !important;
+            background: linear-gradient(135deg, #0B5ED7 0%, #003366 100%) !important;
+            color: #FFFFFF !important;
+            border: none !important;
+            border-radius: 10px !important;
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.3px !important;
+            box-shadow: 0 4px 14px rgba(11, 94, 215, 0.32) !important;
+            transition: all 0.25s ease-in-out !important;
+            cursor: pointer !important;
         }
 
-
-        [data-testid="stForm"] button:hover {
-
-            background:
-                #084298 !important;
-
-            color:
-                #FFFFFF !important;
+        [data-testid="stFormSubmitButton"] button:hover,
+        [data-testid="stForm"] .stButton > button:hover {
+            background: linear-gradient(135deg, #084298 0%, #002244 100%) !important;
+            box-shadow: 0 6px 20px rgba(11, 94, 215, 0.45) !important;
+            transform: translateY(-1px) !important;
         }
 
+        [data-testid="stFormSubmitButton"] button:active,
+        [data-testid="stForm"] .stButton > button:active {
+            transform: translateY(0px) !important;
+            box-shadow: 0 2px 8px rgba(11, 94, 215, 0.3) !important;
+        }
 
-        [data-testid="stForm"] button p,
-        [data-testid="stForm"] button span {
-
-            color:
-                #FFFFFF !important;
-
-            font-weight:
-                700 !important;
+        [data-testid="stFormSubmitButton"] button p,
+        [data-testid="stFormSubmitButton"] button span,
+        [data-testid="stForm"] .stButton > button p,
+        [data-testid="stForm"] .stButton > button span {
+            color: #FFFFFF !important;
+            font-weight: 700 !important;
+            font-size: 15.5px !important;
         }
 
 
